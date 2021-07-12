@@ -1,3 +1,7 @@
+#!/bin/bash
+#
+# Script to bootstrap a basic OpenNMS setup
+
 apt install \
     apt-transport-https \
     ca-certificates \
