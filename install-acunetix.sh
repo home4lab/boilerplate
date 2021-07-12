@@ -8,3 +8,4 @@ echo " Password: admin@123 "
 echo " Path: /home/acunetix/.acunetix/ "
 echo " User: acunetix Pass: acunetix "
 
+echo " https://your_ip:3443 "
