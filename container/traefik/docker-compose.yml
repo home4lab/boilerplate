@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - CF_API_EMAIL=yourname@yourdomain.com
+      #- CF_DNS_API_TOKEN=YOU_API_TOKEN
+      - CF_API_KEY=YOUR_API_KEY
+      # i don't know, i can't use cloudflare dns api token. so, in my case i just run it with api key
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /home/boby/traefik/data/traefik.yml:/traefik.yml:ro
+      - /home/boby/traefik/data/acme.json:/acme.json
+      - /home/boby/traefik/data/configurations:/configurations:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=admin:$$apr1$$KWPicmTp$$/JTty5zgS1zO6n04EE5yb0"
+      - "traefik.http.routers.traefik-secure.entrypoints=https"
+      - "traefik.http.routers.traefik-secure.rule=Host(`traefik-dashboard.yourdomain.com`)"
+      - "traefik.http.routers.traefik-secure.middlewares=traefik-auth"
+      - "traefik.http.routers.traefik-secure.tls=true"
+      - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].main=yourdomain.com"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.yourdomain.com"
+      - "traefik.http.routers.traefik-secure.service=api@internal"
+
+networks:
+  proxy:
+    external: true
