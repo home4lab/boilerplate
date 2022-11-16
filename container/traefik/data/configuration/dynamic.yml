@@ -1,0 +1,117 @@
+http:
+ #region routers
+  routers:
+    shinobi-rtr:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`shinobi.yourdomain.com`)"
+      tls: true
+      service: shinobi-svc
+    heimdall-rtr:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`heimdall.yourdomain.com`)"
+      tls: true
+      service: heimdall-svc
+    prometheus-rtr:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`prometheus.yourdomain.com`)"
+      tls: true
+      service: prometheus-svc
+    grafana-rtr:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`grafana.yourdomain.com`)"
+      tls: true
+      service: grafana-svc
+    adguardhome-rtr:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`adguardhome.yourdomain.com`)"
+      tls: true
+      service: adguardhome-svc
+    portainer-rtr:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`portainer.yourdomain.com`)"
+      tls: true
+      service: portainer-svc
+    jellyfin-rtr:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`jellyfin.yourdomain.com`)"
+      tls: true
+      service: jellyfin-svc
+    qbittorrent-rtr:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`qbittorrent.yourdomain.com`)"
+      tls: true
+      service: qbittorrent-svc
+    prowlarr-rtr:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`prowlarr.yourdomain.com`)"
+      tls: true
+      service: prowlarr-svc
+    sonarr-rtr:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`sonarr.yourdomain.com`)"
+      tls: true
+      service: sonarr-svc
+    radarr-rtr:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`radarr.yourdomain.com`)"
+      tls: true
+      service: radarr-svc
+
+#endregion
+#region services
+  services:
+    shinobi-svc:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.254:8080"
+    heimdall-svc:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.254:10000"
+    prometheus-svc:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.254:9090"
+    grafana-svc:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.254:3000"
+    adguardhome-svc:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.254:1080"
+    portainer-svc:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.10.254:9443"
+    jellyfin-svc:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.254:8096"
+    qbittorrent-svc:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.254:10010"
+    prowlarr-svc:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.254:9696"
+    sonarr-svc:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.254:8989"
+    radarr-svc:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.254:7878"
