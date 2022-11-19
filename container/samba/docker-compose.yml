@@ -1,0 +1,22 @@
+services:
+  samba:
+    image: dperson/samba
+    container_name: samba
+    # -u <name:password>
+    # -s "<name;/path>[;browse;readonly;guest;users;admins;writelist;comment]"
+    # <name> is visible for clients
+    # <path> path on server
+
+    command: -u "name;password" -s "private;/private;yes;no;no;name" -s "guest;/guest;yes;no;yes" -s "media;/media-server;yes;no;yes"  -s "downloads;/downloads;yes;no;yes"
+
+    volumes:
+      - /path-to-private:/private
+      - /path-to-guest:/guest
+      - /path-to-media-server:/media-server
+      - /path-to-downloads:/downloads
+    environment:
+      - TZ=Asia/Jakarta
+    ports:
+      - 139:139
+      - 445:445
+    restart: unless-stopped
