@@ -8,9 +8,9 @@ services:
       - PGID=1000
       - TZ=Asia/Jakarta
     volumes:
-      - /home/boby/lidarr/config:/config
-      - /home/boby/lidarr/music:/music
-      - /home/boby/qbittorrent/downloads:/downloads
+      - $PWD/lidarr/config:/config
+      - $PWD/lidarr/music:/music
+      - $PWD/qbittorrent/downloads:/downloads
     ports:
       - 8686:8686
     restart: unless-stopped
@@ -23,9 +23,9 @@ services:
       - PGID=1000
       - TZ=Asia/Jakarta
     volumes:
-      - /home/boby/sonarr/data:/config
-      - /home/boby/jellyfin/data/tvshows:/tvshows
-      - /home/boby/qbittorrent/downloads:/downloads
+      - $PWD/sonarr/data:/config
+      - $PWD/jellyfin/data/tvshows:/tvshows
+      - $PWD/qbittorrent/downloads:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -40,9 +40,9 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - /home/boby/jellyfin/data/movies:/movies
-      - /home/boby/qbittorrent/downloads:/downloads
-      - /home/boby/radarr/config:/config
+      - $PWD/jellyfin/data/movies:/movies
+      - $PWD/qbittorrent/downloads:/downloads
+      - $PWD/radarr/config:/config
     ports:
       - 7878:7878
 
@@ -57,10 +57,10 @@ services:
     dns:
       - 1.1.1.1
     volumes:
-      - /home/boby/qbittorrent/config:/config
-      - /home/boby/qbittorrent/downloads:/downloads
-      - /home/boby/jellyfin/data/tvshows:/tvshows
-      - /home/boby/jellyfin/data/movies:/movies
+      - $PWD/qbittorrent/config:/config
+      - $PWD/qbittorrent/downloads:/downloads
+      - $PWD/jellyfin/data/tvshows:/tvshows
+      - $PWD/jellyfin/data/movies:/movies
     ports:
       - 10010:10010
       - 6881:6881
@@ -76,8 +76,8 @@ services:
       - UMASK=002
       - TZ=Asia/Jakarta
     volumes:
-      - /home/boby/whisparr/config:/config
-      - /home/boby/qbittorrent/downloads:/downloads
+      - $PWD/whisparr/config:/config
+      - $PWD/qbittorrent/downloads:/downloads
     ports:
       - 6969:6969
 
@@ -89,7 +89,7 @@ services:
       - PGID=1000
       - TZ=Asia/Jakarta
     volumes:
-      - /home/boby/prowlarr/data:/config
+      - $PWD/prowlarr/data:/config
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -103,9 +103,9 @@ services:
       - TZ=Asia/Jakarta
 
     volumes:
-      - /home/boby/jellyfin/data/library:/config
-      - /home/boby/jellyfin/data/tvshows:/data/tvshows
-      - /home/boby/jellyfin/data/movies:/data/movies
+      - $PWD/jellyfin/data/library:/config
+      - $PWD/jellyfin/data/tvshows:/data/tvshows
+      - $PWD/jellyfin/data/movies:/data/movies
     ports:
       - 8096:8096
     restart: unless-stopped
