@@ -20,9 +20,9 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /home/boby/traefik/data/traefik.yml:/traefik.yml:ro
-      - /home/boby/traefik/data/acme.json:/acme.json
-      - /home/boby/traefik/data/configurations:/configurations:ro
+      - $PWD/traefik/data/traefik.yml:/traefik.yml:ro
+      - $PWD/traefik/data/acme.json:/acme.json
+      - $PWD/traefik/data/configurations:/configurations:ro
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.traefik-auth.basicauth.users=admin:$$apr1$$KWPicmTp$$/JTty5zgS1zO6n04EE5yb0"
