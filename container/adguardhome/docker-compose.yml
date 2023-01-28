@@ -1,0 +1,15 @@
+version: '3'
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    environment:
+      - TZ=Asia/Jakarta
+    volumes:
+      - /opt/adguardhome/config:/opt/adguardhome/conf
+      - /opt/adguardhome/data:/opt/adguardhome/data
+    ports:
+      - 3000:3000 #port WebUI
+      - 53:53/tcp
+      - 53:53/udp
+    restart: unless-stopped
