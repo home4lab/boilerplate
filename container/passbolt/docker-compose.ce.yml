@@ -35,6 +35,9 @@ services:
     volumes:
       - gpg_volume:/etc/passbolt/gpg
       - jwt_volume:/etc/passbolt/jwt
+      #Certificate if u have 
+      #- ./your_cert.crt:/etc/passbolt/certs/certificate.crt:ro
+      #- ./your_key.key:/etc/passbolt/certs/certificate.key:ro
     command: ["/usr/bin/wait-for.sh", "-t", "0", "db:3306", "--", "/docker-entrypoint.sh"]
     ports:
       - 80:80
