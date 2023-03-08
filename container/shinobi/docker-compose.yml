@@ -1,0 +1,19 @@
+version: "3"
+services:
+    shinobi:
+        image: registry.gitlab.com/shinobi-systems/shinobi:dev
+        container_name: Shinobi
+#        environment:
+#           - PLUGIN_KEYS=$PLUGIN_YMLS
+#           - SSL_ENABLED=$SSL_TOGGLE
+        volumes:
+           - $HOME/Shinobi/config:/config
+           - $HOME/Shinobi/customAutoLoad:/home/Shinobi/libs/customAutoLoad
+           - $HOME/Shinobi/database:/var/lib/mysql
+           - $HOME/Shinobi/videos:/home/Shinobi/videos
+           - $HOME/Shinobi/plugins:/home/Shinobi/plugins
+           - /dev/shm/Shinobi/streams:/dev/shm/streams
+        ports:
+           - 8080:8080
+        restart: unless-stopped
+#$PLUGIN_LIST
