@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
     networks:
       macvlan:
-        ipv4_address: 192.168.10.11
+        ipv4_address: 10.0.0.11
 
 networks:
   macvlan:
