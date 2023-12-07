@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  unimus:
+    container_name: unimus
+    ports:
+      - '8085:8085'
+    volumes:
+      - '/opt/unimus/config:/etc/unimus/'
+    image: croc/unimus:2.3.3
+    restart: unless-stopped
