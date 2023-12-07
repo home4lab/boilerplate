@@ -11,7 +11,8 @@ entryPoints:
           scheme: https
   https:
     address: ":443"
-
+    http:
+      tls: true
 serversTransport:
   insecureSkipVerify: true
 
