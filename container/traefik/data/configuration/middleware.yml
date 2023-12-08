@@ -1,0 +1,22 @@
+## HTTP MIDDLEWARE SECTION
+http:
+  middlewares:
+    secureHeaders-mid:
+      headers:
+        frameDeny: true
+        browserXssFilter: true
+        contentTypeNosniff: true
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 15552000
+        customFrameOptionsValue: SAMEORIGIN
+        customRequestHeaders:
+          X-Forwarded-Proto: https
+    ratelimit-mid:
+      rateLimit:
+        average: 100
+        burst: 200
+        period: 1m
+    compress-mid:
+      compress: {}
