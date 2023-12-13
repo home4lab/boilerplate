@@ -1,20 +1,5 @@
 version: "2"
 services:
-  lidarr:
-    image: lscr.io/linuxserver/lidarr:latest
-    container_name: lidarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Jakarta
-    volumes:
-      - $PWD/lidarr/config:/config
-      - $PWD/lidarr/music:/music
-      - $PWD/qbittorrent/downloads:/downloads
-    ports:
-      - 8686:8686
-    restart: unless-stopped
-
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
@@ -23,9 +8,9 @@ services:
       - PGID=1000
       - TZ=Asia/Jakarta
     volumes:
-      - $PWD/sonarr/data:/config
-      - $PWD/jellyfin/data/tvshows:/tvshows
-      - $PWD/qbittorrent/downloads:/downloads
+      - /opt/stacks/sonarr/data:/config
+      - /opt/stacks/jellyfin/data/tvshows:/tvshows
+      - /opt/stacks/qbittorrent/downloads:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -40,9 +25,9 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - $PWD/jellyfin/data/movies:/movies
-      - $PWD/qbittorrent/downloads:/downloads
-      - $PWD/radarr/config:/config
+      - /opt/stacks/jellyfin/data/movies:/movies
+      - /opt/stacks/qbittorrent/downloads:/downloads
+      - /opt/stacks/radarr/config:/config
     ports:
       - 7878:7878
 
@@ -57,29 +42,15 @@ services:
     dns:
       - 1.1.1.1
     volumes:
-      - $PWD/qbittorrent/config:/config
-      - $PWD/qbittorrent/downloads:/downloads
-      - $PWD/jellyfin/data/tvshows:/tvshows
-      - $PWD/jellyfin/data/movies:/movies
+      - /opt/stacks/qbittorrent/config:/config
+      - /opt/stacks/qbittorrent/downloads:/downloads
+      - /opt/stacks/jellyfin/data/tvshows:/tvshows
+      - /opt/stacks/jellyfin/data/movies:/movies
     ports:
       - 10010:10010
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
-
-  whisparr:
-    image: cr.hotio.dev/hotio/whisparr
-    container_name: whisparr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - UMASK=002
-      - TZ=Asia/Jakarta
-    volumes:
-      - $PWD/whisparr/config:/config
-      - $PWD/qbittorrent/downloads:/downloads
-    ports:
-      - 6969:6969
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
@@ -89,7 +60,7 @@ services:
       - PGID=1000
       - TZ=Asia/Jakarta
     volumes:
-      - $PWD/prowlarr/data:/config
+      - /opt/stacks/prowlarr/data:/config
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -103,9 +74,9 @@ services:
       - TZ=Asia/Jakarta
 
     volumes:
-      - $PWD/jellyfin/data/library:/config
-      - $PWD/jellyfin/data/tvshows:/data/tvshows
-      - $PWD/jellyfin/data/movies:/data/movies
+      - /opt/stacks/jellyfin/data/library:/config
+      - /opt/stacks/jellyfin/data/tvshows:/data/tvshows
+      - /opt/stacks/jellyfin/data/movies:/data/movies
     ports:
       - 8096:8096
     restart: unless-stopped
