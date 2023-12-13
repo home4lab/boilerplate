@@ -1,8 +1,9 @@
-version: "3"
+version: '3.8'
 services:
   app:
-    image: 'jc21/nginx-proxy-manager:latest'
+    image: 'jc21/nginx-proxy-manager:2.9.22'
     restart: unless-stopped
+    container_name: nginx
     ports:
       # These ports are in format <host-port>:<container-port>
       - '80:80' # Public HTTP Port
@@ -12,14 +13,15 @@ services:
       # - '21:21' # FTP
 
     # Uncomment the next line if you uncomment anything in the section
-    # environment:
+    environment:
       # Uncomment this if you want to change the location of 
       # the SQLite DB file within the container
       # DB_SQLITE_FILE: "/data/database.sqlite"
-
+      # Change timezone to your location
+      TZ: "Asia/Jakarta"
       # Uncomment this if IPv6 is not enabled on your host
-      # DISABLE_IPV6: 'true'
+      DISABLE_IPV6: 'true'
 
     volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
+      - /opt/stacks/nginx-proxy-manager/data:/data
+      - /opt/stacks/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
