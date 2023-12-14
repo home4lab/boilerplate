@@ -1,4 +1,3 @@
-## HTTP MIDDLEWARE SECTION
 http:
   middlewares:
     secureHeaders-mid:
@@ -13,6 +12,7 @@ http:
         customFrameOptionsValue: SAMEORIGIN
         customRequestHeaders:
           X-Forwarded-Proto: https
+        contentSecurityPolicy: upgrade-insecure-requests
     ratelimit-mid:
       rateLimit:
         average: 100
