@@ -1,0 +1,13 @@
+version: "3"
+services:
+  guacamole:
+    image: abesnier/guacamole
+    container_name: guacamole
+    volumes:
+      - /opt/guacamole/config:/config
+      - /opt/guacamole/data/recordings:/recordings
+    environment:
+      - EXTENSIONS=history-recording-storage
+    ports:
+      - 8080:8080
+    restart: unless-stopped
