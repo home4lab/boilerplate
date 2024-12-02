@@ -75,8 +75,8 @@ elif [ "$type_choice" -eq 2 ]; then
     fi
 
     # Ask for user input for forward-server configuration
-    read -p "Enter the IP address: " input_ip
-    read -p "Enter the port number: " input_port
+    read -p "Enter the Server Domain or IP address : " input_server
+    read -p "Enter the Server port number: " input_port
 
     # Ask for user input for password admin with masked input
     echo -n "Enter password for admin: "
@@ -92,7 +92,7 @@ elif [ "$type_choice" -eq 2 ]; then
     sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/
 
     # Add the forward-server using user inputs
-    sudo /opt/splunkforwarder/bin/splunk add forward-server $input_ip:$input_port
+    sudo /opt/splunkforwarder/bin/splunk add forward-server $input_server:$input_port
 
     # Restart Splunk Forwarder to apply the new configuration
     sudo /opt/splunkforwarder/bin/splunk restart
