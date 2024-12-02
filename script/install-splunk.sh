@@ -88,6 +88,9 @@ elif [ "$type_choice" -eq 2 ]; then
     # Start Splunk Forwarder
     sudo /opt/splunkforwarder/bin/splunk start --accept-license --answer-yes --no-prompt --seed-passwd $passadmin
 
+    # Add path to monitor
+    sudo /opt/splunkforwarder/bin/splunk add monitor /var/log/
+
     # Add the forward-server using user inputs
     sudo /opt/splunkforwarder/bin/splunk add forward-server $input_ip:$input_port
 
