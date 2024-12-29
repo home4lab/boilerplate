@@ -1,6 +1,6 @@
 volumes:
-  files:
-    driver: local
+  # files:
+    # driver: local
   mysql:
     driver: local
   redis:
@@ -29,13 +29,15 @@ services:
       - OWNCLOUD_MYSQL_UTF8MB4=true
       - OWNCLOUD_REDIS_ENABLED=true
       - OWNCLOUD_REDIS_HOST=redis
+      - PUID=1000
+      - PGID=1000
     healthcheck:
       test: ["CMD", "/usr/bin/healthcheck"]
       interval: 30s
       timeout: 10s
       retries: 5
     volumes:
-      - files:/mnt/data
+      - ./data:/mnt/data
 
   mariadb:
     image: mariadb:10.11 # minimum required ownCloud version is 10.9
