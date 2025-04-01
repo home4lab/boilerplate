@@ -1,4 +1,3 @@
-version: "3"
 services:
     shinobi:
         image: registry.gitlab.com/shinobi-systems/shinobi:dev
