@@ -7,9 +7,9 @@ services:
       - PGID=1000
       - TZ=Asia/Jakarta
     volumes:
-      - /opt/stacks/sonarr/data:/config
-      - /opt/stacks/jellyfin/data/tvshows:/tvshows
-      - /opt/stacks/qbittorrent/downloads:/downloads
+      - ./sonarr/data:/config
+      - ./jellyfin/data/tvshows:/tvshows
+      - ./qbittorrent/downloads:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -24,9 +24,9 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - /opt/stacks/jellyfin/data/movies:/movies
-      - /opt/stacks/qbittorrent/downloads:/downloads
-      - /opt/stacks/radarr/config:/config
+      - ./jellyfin/data/movies:/movies
+      - ./qbittorrent/downloads:/downloads
+      - ./radarr/config:/config
     ports:
       - 7878:7878
 
@@ -41,10 +41,10 @@ services:
     dns:
       - 1.1.1.1
     volumes:
-      - /opt/stacks/qbittorrent/config:/config
-      - /opt/stacks/qbittorrent/downloads:/downloads
-      - /opt/stacks/jellyfin/data/tvshows:/tvshows
-      - /opt/stacks/jellyfin/data/movies:/movies
+      - ./qbittorrent/config:/config
+      - ./qbittorrent/downloads:/downloads
+      - ./jellyfin/data/tvshows:/tvshows
+      - ./jellyfin/data/movies:/movies
     ports:
       - 10010:10010
       - 6881:6881
@@ -59,7 +59,7 @@ services:
       - PGID=1000
       - TZ=Asia/Jakarta
     volumes:
-      - /opt/stacks/prowlarr/data:/config
+      - ./prowlarr/data:/config
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -73,9 +73,22 @@ services:
       - TZ=Asia/Jakarta
 
     volumes:
-      - /opt/stacks/jellyfin/data/library:/config
-      - /opt/stacks/jellyfin/data/tvshows:/data/tvshows
-      - /opt/stacks/jellyfin/data/movies:/data/movies
+      - ./jellyfin/data/library:/config
+      - ./jellyfin/data/tvshows:/data/tvshows
+      - ./jellyfin/data/movies:/data/movies
     ports:
       - 8096:8096
     restart: unless-stopped
+
+  byparr: # For bypass cloudflare challenge
+    image: ghcr.io/thephaseless/byparr
+    container_name: byparr
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./screenshots:/app/screenshots # For screenshots when exception occurs
+    ports:
+      - 8191:8191
